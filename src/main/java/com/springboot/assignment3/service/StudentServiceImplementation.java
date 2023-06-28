@@ -3,18 +3,17 @@ package com.springboot.assignment3.service;
 
 import com.springboot.assignment3.entities.Student;
 import com.springboot.assignment3.repositories.StudentRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
-@Component
-public class StudentServiceImplementation implements StudentService {
 
-  private static final Logger logger = LoggerFactory.getLogger(StudentServiceImplementation.class);
+@Component
+@Slf4j
+public class StudentServiceImplementation implements StudentService {
 
 
   private final StudentRepository studentRepository;
@@ -29,7 +28,7 @@ public class StudentServiceImplementation implements StudentService {
     try {
       return studentRepository.save(student);
     } catch (Exception e) {
-      logger.error("exception occurred while creating an student");
+      log.error("exception occurred while creating an student");
       throw new RuntimeException("failed to create the student");
     }
   }
@@ -39,7 +38,7 @@ public class StudentServiceImplementation implements StudentService {
     try {
       return studentRepository.findAll();
     } catch (Exception e) {
-      logger.error("exception occurred while retrieving  the student");
+      log.error("exception occurred while retrieving  the student");
       throw new RuntimeException("failed to get all students");
     }
   }
@@ -53,7 +52,7 @@ public class StudentServiceImplementation implements StudentService {
         return student.get();
       }
     } catch (Exception e) {
-      logger.warn("please enter valid id");
+      log.warn("please enter valid id");
       throw new RuntimeException(e);
     }
 
@@ -66,7 +65,7 @@ public class StudentServiceImplementation implements StudentService {
     try {
       return studentRepository.save(student);
     } catch (Exception e) {
-      logger.error("exception occurred while updating student");
+      log.error("exception occurred while updating student");
       throw new RuntimeException("failed to update student");
     }
   }
@@ -78,11 +77,11 @@ public class StudentServiceImplementation implements StudentService {
       Optional<Student> s = studentRepository.findById(id);
       if (s.isPresent()) {
         studentRepository.delete(s.get());
-        logger.info("Student deleted successfully");
+        log.info("Student deleted successfully");
       }
 
     } catch (Exception e) {
-      logger.error("exception occurred while deleting student");
+      log.error("exception occurred while deleting student");
       throw new RuntimeException("failed to delete student");
     }
   }
