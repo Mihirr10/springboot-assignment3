@@ -17,7 +17,7 @@ import java.util.Optional;
 @Slf4j
 public class StudentServiceImplementation implements StudentService {
 
-  private static final Logger logger = LoggerFactory.getLogger(StudentServiceImplementation.class);
+
 
 
   private final StudentRepository studentRepository;
